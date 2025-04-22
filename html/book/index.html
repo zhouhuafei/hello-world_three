@@ -30,13 +30,15 @@
 
       // 加载材质、加载纹理
       const materials = [
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('right.jpg') }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('left.jpg') }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('up.jpg') }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('down.jpg') }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('front.jpg') }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('back.jpg') })
+        new THREE.MeshBasicMaterial({ color: background }),
+        new THREE.MeshBasicMaterial({ color: background }),
+        new THREE.MeshBasicMaterial({ color: background }),
+        new THREE.MeshBasicMaterial({ color: background }),
+        new THREE.MeshBasicMaterial({ color: background }),
+        new THREE.MeshBasicMaterial({ color: background })
       ]
+      const textures = ['right.jpg', 'left.jpg', 'up.jpg', 'down.jpg', 'front.jpg', 'back.jpg']
+      textures.forEach((texturePath, textureIndex) => new THREE.TextureLoader().load(texturePath, texture => (materials[textureIndex] = new THREE.MeshBasicMaterial({ map: texture }))))
 
       // 创建网格并添加到场景
       const cube = new THREE.Mesh(geometry, materials)
