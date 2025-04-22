@@ -18,54 +18,60 @@
     const radianToAngle = radian => radian * (180 / Math.PI)
     </script>
     <script>
-    // 创建场景
-    const scene = new THREE.Scene()
+    const init = async () => {
+      const background = '#ededed'
 
-    // 创建立方体
-    const geometry = new THREE.BoxGeometry(9, 16, 1)
+      // 创建场景
+      const scene = new THREE.Scene()
+      scene.background = new THREE.Color(background)
 
-    // 加载材质、加载纹理
-    const materials = [
-      new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('front.jpg') }),
-      new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('back.jpg') }),
-      new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('up.jpg') }),
-      new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('down.jpg') }),
-      new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('left.jpg') }),
-      new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('right.jpg') })
-    ]
+      // 创建立方体
+      const geometry = new THREE.BoxGeometry(9, 16, 1)
 
-    // 创建网格并添加到场景
-    const cube = new THREE.Mesh(geometry, materials)
-    scene.add(cube)
+      // 加载材质、加载纹理
+      const materials = [
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('right.jpg') }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('left.jpg') }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('up.jpg') }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('down.jpg') }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('front.jpg') }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('back.jpg') })
+      ]
 
-    // 创建相机
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    )
-    camera.position.z = 30
+      // 创建网格并添加到场景
+      const cube = new THREE.Mesh(geometry, materials)
+      scene.add(cube)
 
-    // 创建渲染器
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true // 抗锯齿
-    })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    document.body.appendChild(renderer.domElement)
+      // 创建相机
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      )
+      camera.position.z = 30
 
-    // 动画循环
-    const animate = () => {
-      requestAnimationFrame(animate)
+      // 创建渲染器
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true // 抗锯齿
+      })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      document.body.appendChild(renderer.domElement)
 
-      // 旋转立方体（弧度）
-      // cube.rotation.x += 0.01
-      cube.rotation.y -= 0.01
+      // 动画循环
+      const animate = () => {
+        requestAnimationFrame(animate)
 
-      // 渲染场景
-      renderer.render(scene, camera)
+        // 旋转立方体（弧度）
+        // cube.rotation.x += 0.01
+        cube.rotation.y -= 0.01
+
+        // 渲染场景
+        renderer.render(scene, camera)
+      }
+      animate()
     }
-    animate()
+    init()
     </script>
   </body>
 </html>
