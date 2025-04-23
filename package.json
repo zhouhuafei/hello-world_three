@@ -1,0 +1,14 @@
+{
+  "name": "hello-world_three",
+  "private": true,
+  "engines": {
+    "node": "18.17.1",
+    "npm": "9.6.7"
+  },
+  "scripts": {
+    "server": "http-server ./html"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
