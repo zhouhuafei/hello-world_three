@@ -11,6 +11,7 @@
     }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
   </head>
   <body>
     <script>
@@ -19,6 +20,7 @@
     </script>
     <script>
     const init = async () => {
+      let isAnimating = true
       const background = '#ededed'
 
       // 创建场景
@@ -62,6 +64,7 @@
 
       // 动画循环
       const animate = () => {
+        if (!isAnimating) return
         requestAnimationFrame(animate)
 
         // 旋转立方体（弧度）
@@ -72,6 +75,27 @@
         renderer.render(scene, camera)
       }
       animate()
+
+      // 监听拖动手势
+      const hammer = new Hammer(document.body)
+      hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+      hammer.on('panstart', () => {
+        isAnimating = false
+      })
+      hammer.on('panend', () => {
+        isAnimating = true
+        animate()
+      })
+      hammer.on('pan', (event) => {
+        // console.log('event：', event)
+        const deltaX = event.velocityX * 0.1 // 水平拖动
+        const deltaY = event.velocityY * 0.1 // 垂直拖动
+
+        cube.rotation.y += deltaX
+        cube.rotation.x += deltaY
+
+        renderer.render(scene, camera)
+      })
     }
     init()
     </script>
