@@ -81,7 +81,7 @@
       }
       animate()
 
-      // 监听拖动手势
+      // 监听拖动事件
       hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
       hammer.on('panstart', () => {
         isAnimating = false
@@ -91,7 +91,7 @@
         animate()
       })
       hammer.on('pan', (event) => {
-        // console.log('监听拖动手势：', event)
+        // console.log('监听拖动事件：', event)
         const deltaX = event.velocityX * 0.1 // 水平拖动
         const deltaY = event.velocityY * 0.1 // 垂直拖动
 
@@ -101,13 +101,13 @@
         renderer.render(scene, camera)
       })
 
-      // 监听缩放手势
+      // 监听缩放事件
       hammer.get('pinch').set({ enable: true })
       hammer.on('pinchstart', (event) => {
         isAnimating = false
       })
       hammer.on('pinchmove', (event) => {
-        // console.log('监听缩放手势:', event)
+        // console.log('监听缩放事件:', event)
         camera.position.z = cameraPositionZ / event.scale
         if (camera.position.z >= 40) camera.position.z = 40
         if (camera.position.z <= 20) camera.position.z = 20
@@ -121,6 +121,7 @@
 
       // 监听滚轮事件
       document.body.addEventListener('wheel', (event) => {
+        // console.log('监听滚轮事件:', event)
         if (event.deltaY > 0) {
           camera.position.z++
           if (camera.position.z >= 40) camera.position.z = 40
