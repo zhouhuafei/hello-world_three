@@ -32,7 +32,10 @@
       scene.background = new THREE.Color(background)
 
       // 创建立方体
-      const geometry = new THREE.BoxGeometry(9, 16, 1)
+      const xScale = 9
+      const yScale = 16
+      const zScale = 1
+      const geometry = new THREE.BoxGeometry(xScale, yScale, zScale)
 
       // 加载材质、加载纹理
       const materials = [
@@ -57,7 +60,7 @@
         0.1,
         1000
       )
-      const cameraPositionZ = 27
+      const cameraPositionZ = xScale * 3
       camera.position.z = cameraPositionZ
 
       // 创建渲染器
