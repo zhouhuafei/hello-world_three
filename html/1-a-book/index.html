@@ -60,7 +60,7 @@
         0.1,
         1000
       )
-      const cameraPositionZ = xScale * 3
+      let cameraPositionZ = xScale * 3
       camera.position.z = cameraPositionZ
 
       // 创建渲染器
@@ -116,6 +116,7 @@
         renderer.render(scene, camera)
       })
       hammer.on('pinchend', (event) => {
+        cameraPositionZ = camera.position.z
         isAnimating = true
         animate()
       })
