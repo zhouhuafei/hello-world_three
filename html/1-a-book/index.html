@@ -43,7 +43,7 @@
         new THREE.MeshBasicMaterial({ color: background }),
         new THREE.MeshBasicMaterial({ color: background })
       ]
-      const textures = ['right.jpg', 'left.jpg', 'up.jpg', 'down.jpg', 'front.jpg', 'back.jpg']
+      const textures = ['right.jpg?v=1.0.2', 'left.jpg?v=1.0.2', 'up.jpg?v=1.0.2', 'down.jpg?v=1.0.2', 'front.jpg?v=1.0.2', 'back.jpg?v=1.0.2']
       textures.forEach((texturePath, textureIndex) => new THREE.TextureLoader().load(texturePath, texture => (materials[textureIndex] = new THREE.MeshBasicMaterial({ map: texture }))))
 
       // 创建网格并添加到场景
@@ -57,7 +57,7 @@
         0.1,
         1000
       )
-      const cameraPositionZ = 30
+      const cameraPositionZ = 27
       camera.position.z = cameraPositionZ
 
       // 创建渲染器
@@ -109,8 +109,6 @@
       hammer.on('pinchmove', (event) => {
         // console.log('监听缩放事件:', event)
         camera.position.z = cameraPositionZ / event.scale
-        if (camera.position.z >= 40) camera.position.z = 40
-        if (camera.position.z <= 20) camera.position.z = 20
 
         renderer.render(scene, camera)
       })
@@ -124,10 +122,8 @@
         // console.log('监听滚轮事件:', event)
         if (event.deltaY > 0) {
           camera.position.z++
-          if (camera.position.z >= 40) camera.position.z = 40
         } else {
           camera.position.z--
-          if (camera.position.z <= 20) camera.position.z = 20
         }
       })
     }
